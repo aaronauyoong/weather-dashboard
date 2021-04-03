@@ -16,7 +16,7 @@ let cityWeatherSearch = function(event){
         cities.unshift({city});
         cityInputEl.value = "";
     } else{
-        window.alert("");
+        window.alert("Please enter a city name in the search bar.");
     }
 
     // Functions for saving search and adding it to searchHistory
