@@ -2,6 +2,14 @@
     --stormgrey: darkgrey;
 }
 
+#mainTitle {
+    background: var(--stormgrey);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
 .currentCity {
     border-radius: 5px;
 }
