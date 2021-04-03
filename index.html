@@ -4,12 +4,70 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap stylesheet link-->
+    <link rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+    crossorigin="anonymous">
+    <!-- FontAwesome stylesheet link -->
+    <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+    crossorigin="anonymous"/>
+    <!-- Own stylesheet link -->
     <link rel="stylesheet" href="./assets/css/style.css" /> 
     <title>Weather Dashboard</title>
 </head>
 
 <body>
 
+    <!-- Page heading  -->
+    <div id="mainTitle" class="container-fluid">
+        <div class="bg-dark text-white">
+            <h1>Weather Dashboard</h1>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Search Container -->
+            <div id="searchContainer" class="col-12 col-md-3">
+                <!-- Search Input -->
+                <div id="searchInput" class="input-group mb-3">
+                    <h2>Search for a city:</h2>
+                    <div class="form-outline">
+                        <input type="search" id="form1" class="form-control"/>
+                    </div>
+                    <div class="input-group-append">
+                        <button id="searchBtn" type="button" class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- Search History -->
+                <div id="searchHistory" class="searchHistoryBtns">
+                    <span>Search History</span>
+                </div>
+            </div>
+             <!-- Search Results -->
+            <div id="searchResults" class="col-12 col-md-9">
+                <div id="cityForecastNow" class="currentCity row border m-2 p-2">
+                    <span>Current Forecast</span>
+                </div>
+                <div id="city5DayForecast" class="row m-2 p-2">
+                    <span>5 Day Forecast</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Link to jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- Link to js file -->
     <script src="./assets/js/script.js"></script>
 </body>
 

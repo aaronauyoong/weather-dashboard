@@ -1,0 +1,8 @@
+:root {
+    --stormgrey: darkgrey;
+}
+
+.currentCity {
+    border-radius: 5px;
+}
+
