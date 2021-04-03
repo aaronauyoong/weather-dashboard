@@ -33,7 +33,7 @@ let saveSearchHistory = function(){
 // Get weather API
 function getWeather() {
 
-    let weatherAPIKey = "9f48927a879f630c354776aa51766753";
+    let weatherAPIKey = "3f6064abc9bf7b1ed4920185e7d8007a";
     let weatherAPI = 'https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${weatherAPIKey}'
 
 };
