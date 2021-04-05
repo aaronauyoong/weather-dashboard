@@ -2,6 +2,10 @@
     --stormgrey: darkgrey;
 }
 
+ul {
+    list-style-type: none;
+}
+
 #mainTitle {
     background: var(--stormgrey);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -14,3 +18,17 @@
     border-radius: 5px;
 }
 
+.hide {
+    display: none;
+}
+
+#todayForecast {
+    margin: auto;
+    text-align: center;
+    width: 100%;
+};
+
+#todayWeatherContainer {
+    margin: auto;
+    text-align: center;
+};
