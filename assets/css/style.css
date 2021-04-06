@@ -1,9 +1,16 @@
 :root {
-    --stormgrey: darkgrey;
+    --stormblue: rgb(39, 39, 56);
+    --green: green;
+    --yellow: yellow;
+    --orange: orange;
+    --red: red;
+    --violet: violet;
+    --white: white;
+    --black: black;
 }
 
-ul {
-    list-style-type: none;
+p {
+    padding: 5px;
 }
 
 #mainTitle {
@@ -22,13 +29,63 @@ ul {
     display: none;
 }
 
+#cityForecastNow {
+    background-color: var(--stormblue);
+    color: white;
+}
+
 #todayForecast {
-    margin: auto;
+    /* margin: auto; */
     text-align: center;
     width: 100%;
 };
 
-#todayWeatherContainer {
+/* #todayWeatherContainer {
     margin: auto;
-    text-align: center;
-};
+    text-align: left;
+    width: 90%;
+}; */
+
+#uvIndex {
+    padding: 5px;
+}
+
+.uvLow {
+    background-color: var(--green);
+    color: var(--white);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid var(--green);
+}
+
+.uvModerate {
+    background-color: var(--yellow);
+    color: var(--black);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid var(--yellow);
+}
+
+.uvHigh {
+    background-color: var(--orange);
+    color: var(--black);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid var(--orange);
+}
+
+.uvVeryHigh {
+    background-color: var(--red);
+    color: var(--white);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid var(--red);
+}
+
+.uvExtreme {
+    background-color: var(--violet);
+    color: var(--white);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid var(--violet);
+}

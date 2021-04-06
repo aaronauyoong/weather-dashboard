@@ -36,9 +36,9 @@
                 <!-- Search Input -->
                 <div class="input-group mb-3">
                     <h2>Search for a city:</h2>
-                    <div id="cityWeatherSearchForm" class="form-outline">
+                    <form id="cityWeatherSearchForm" class="form-outline">
                         <input id="citySearchInput" type="search" class="form-control"/>
-                    </div>
+                    </form>
                     <div class="input-group-append">
                         <button id="searchBtn" type="button" class="btn btn-primary">
                             <i class="fas fa-search"></i>
@@ -55,13 +55,16 @@
                 <div id="cityForecastNow" class="currentCity row border m-2 p-2">
                     <div id="todayForecast"><h3>Today's Forecast</h3></div>
                     <div id="todayWeatherContainer" class="list-group">
-                        <h4><span id="thisCity"></span></h4>
-                        <h5><span id="dateNow"></span></h5>
-                        <img id="weatherIcon" alt="This is today's weather icon.">
+                        <div id="currentWeatherTitle">
+                            <h5>
+                                <span id="thisCity"></span> (<span id="dateNow"></span>)
+                                <img id="weatherIcon" alt="Today's weather icon.">
+                            </h5>
+                        </div>
                         <p>Temperature: <span id="temperature"></span> °C</p>
                         <p>Humidity: <span id="humidity"></span> %</p>
                         <p>Wind Speed: <span id="windSpeed"></span> km/h</p>
-                        <p>UV Index: <span id="uvIndex"></span></p>
+                        <p>UV Index: <span id="uvIndexRisk"></span></p>
                     </div>
                 </div>
 
@@ -70,11 +73,9 @@
                     <div id="fiveDayForecastContainer" class="d-flex flex-row">
                         <div id="fiveDayForecastCard">
                             <h5><span class="forecastDate"></span></h5>
-                            <img id="forecastWeatherIcon" alt="This is a weather forecast icon."/>
-                            <ul>
-                                <li><span id="forecastTemp"></span></li>
-                                <li><span id="forecastHumidity"></span></li>
-                            </ul>
+                            <img id="forecastWeatherIcon" alt="This is a weather forecast indicator icon."/>
+                            <p><span id="forecastTemp"></span></p>
+                            <p><span id="forecastHumidity"></span></p>
                         </div>
 
                     </div>
