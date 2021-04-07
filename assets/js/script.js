@@ -10,6 +10,7 @@ let forecastResults = document.getElementById("city5DayForecast");
 let citySearch = document.getElementById("citySearchInput");
 let cityWeatherForm = document.getElementById("cityWeatherSearchForm");
 let currentWeatherIcon = document.getElementById("weatherIcon");
+let forecastWeatherIcon = document.getElementById("forecastIcon");
 let citySearchBtn = document.getElementById("searchBtn");
 
 const currentWeatherArticle = document.getElementById("todayWeatherContainer");
@@ -61,7 +62,7 @@ function getWeatherToday(citySearch) {
             console.log(data.current.temp);
 
             displayUVI(data);
-            displayFiveDayForecast(data);
+            displayFiveDayForecast(data.daily.slice(1,6));
         }).catch(error => {
             console.log("error: ", error)
         });
@@ -72,28 +73,51 @@ function getWeatherToday(citySearch) {
 function displayUVI(data) {
 
     const currentUVIndex = document.getElementById("uvIndexRisk");
+    const apiUVIndex = data.current.uvi;
     const apiWeatherIcon = data.current.weather[0].icon;
     
     currentWeatherIcon.src = "https://openweathermap.org/img/wn/" + apiWeatherIcon + ".png";
-    currentUVIndex.innerHTML = data.current.uvi;
+    currentUVIndex.innerHTML = apiUVIndex;
 
-    if (currentUVIndex < 2) {
+    if (apiUVIndex >= 0 && apiUVIndex <= 2.99) {
         currentUVIndex.classList.add("uvLow");
-    } else if (currentUVIndex >= 2 && currentUVIndex <= 5) {
+    } else if (apiUVIndex >= 3 && apiUVIndex <= 5.99) {
         currentUVIndex.classList.add("uvModerate");
-    } else if (currentUVIndex >= 6 && currentUVIndex <= 7) {
+    } else if (apiUVIndex >= 6 && apiUVIndex <= 7.99) {
         currentUVIndex.classList.add("uvHigh");
-    } else if (currentUVIndex >= 8 && currentUVIndex <= 10) {
+    } else if (apiUVIndex >= 8 && apiUVIndex <= 10.99) {
         currentUVIndex.classList.add("uvVeryHigh");
     } else {
         currentUVIndex.classList.add("uvExtreme");
     }
-
-    // Insert five day forecast function here
 }; 
 
-function displayFiveDayForecast(data) {
+function displayFiveDayForecast(days) {
 
+    let forecastContainerEl = document.getElementById("fiveDayForecastContainer");
+
+    days.forEach((day) => {
+        const forecastDate = moment.unix(day.dt).format("ddd, DD MMM YYYY");
+        let forecastIcon = day.weather[0].icon;
+        let forecastIconUrl = "https://openweathermap.org/img/wn/" + forecastIcon + ".png";
+        let forecastTemp = day.temp.max;
+        let celsiusTempForecast = CELSIUS_CONVERSION(forecastTemp).toFixed(1);
+        let forecastHumidity =  day.humidity;
+
+        // construct card content
+        const weatherCard = `
+        <div id="fiveDayForecastCard" class="weatherCard">
+        <h5>${forecastDate}</h5>
+        <img src=${forecastIconUrl} alt="This is a weather forecast indicator icon."/>
+        <p>Temperature: <span>${celsiusTempForecast}</span> °C</p>
+        <p>Humidity: <span>${forecastHumidity} %</span></p>
+        </div> 
+        `;
+
+        // append weatherCard to container
+        forecastContainerEl.innerHTML += weatherCard;
+
+    });
 };
 
 function displayCurrentWeather(data){

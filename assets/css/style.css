@@ -16,6 +16,7 @@ p {
 #mainTitle {
     background: var(--stormgrey);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 40px;
     text-align: center;
     padding: 0;
     margin: 0;
@@ -35,16 +36,8 @@ p {
 }
 
 #todayForecast {
-    /* margin: auto; */
-    text-align: center;
     width: 100%;
 };
-
-/* #todayWeatherContainer {
-    margin: auto;
-    text-align: left;
-    width: 90%;
-}; */
 
 #uvIndex {
     padding: 5px;
@@ -88,4 +81,27 @@ p {
     border-radius: 0.5rem;
     padding: 0.5rem;
     border: 1px solid var(--violet);
+}
+
+#city5DayForecast {
+    background-color: lightblue;
+    border-radius: 0.5rem;
+}
+
+.forecastTitle {
+    justify-content: center;
+}
+
+#fiveDayForecastContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.weatherCard {
+    display: inline-block;
+    background-color: var(--stormblue);
+    color: lightgray;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.5rem;
+    margin: 0.5rem;
 }
