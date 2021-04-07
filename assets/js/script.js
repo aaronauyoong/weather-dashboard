@@ -8,6 +8,8 @@ let forecastResults = document.getElementById("city5DayForecast");
 let citySearch = document.getElementById("citySearchInput");
 let currentWeatherIcon = document.getElementById("weatherIcon");
 let citySearchButton = document.getElementById("searchBtn");
+let forecastContainerEl = document.getElementById("fiveDayForecastContainer");
+
 
 // SEARCH HISTORY SECTION
 let citySearchArr = [];
@@ -21,6 +23,7 @@ citySearchButton.addEventListener("click", function (event) {
     citySearchArr.push(citySearchValue);
     localStorage.setItem("cityName", JSON.stringify(citySearchArr));
 
+    clearForecastCards();
     getWeatherToday(citySearchValue);
     displaySearchHistory();
 });
@@ -91,7 +94,8 @@ function getWeatherToday(city) {
         }).catch(error => {
             console.log("error: ", error)
         });
-    }); showResults();
+        showResults();
+    }); 
 };
 
 // Function to display UV Index and weather icon (linked to same onecall API)
@@ -119,8 +123,6 @@ function displayUVI(data) {
 
 function displayFiveDayForecast(days) {
 
-    let forecastContainerEl = document.getElementById("fiveDayForecastContainer");
-
     days.forEach((day) => {
         const forecastDate = moment.unix(day.dt).format("ddd, DD MMM YYYY");
         let forecastIcon = day.weather[0].icon;
@@ -142,6 +144,10 @@ function displayFiveDayForecast(days) {
         // append weatherCard to container
         forecastContainerEl.innerHTML += weatherCard;
     });
+};
+
+function clearForecastCards() {
+    forecastContainerEl.innerHTML = "";
 };
 
 function displayCurrentWeather(data){
