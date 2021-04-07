@@ -1,7 +1,8 @@
 # 06 Server-Side APIs: Weather Dashboard
 Project Owner: Aaron Au Yoong
 </br>
-View live link here:
+View live link here: https://aaronauyoong.github.io/weather-dashboard/.
+
 
 ## Introduction
 In order for travel enthusiasts to better plan their trips, they have the need to know weather outlooks for multiple cities. The creation of a weather dashboard would be ideal in order to meet their needs. 

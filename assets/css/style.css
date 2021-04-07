@@ -28,6 +28,7 @@ p {
 
 .hide {
     display: none;
+    visibility: hidden;
 }
 
 #cityForecastNow {

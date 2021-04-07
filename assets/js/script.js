@@ -1,20 +1,46 @@
 // OpenWeather API Key
 let weatherAPIKey = "3f6064abc9bf7b1ed4920185e7d8007a";
 
-// Empty array for search history
-let citySearchHistory = [];
-
 // Define main variables
-let dailyWeatherResults = document.getElementById("searchResults");
+let searchHistoryEl = document.getElementById("searchHistory");
+let currentWeatherForecast = document.getElementById("cityForecastNow");
 let forecastResults = document.getElementById("city5DayForecast");
 let citySearch = document.getElementById("citySearchInput");
-let cityWeatherForm = document.getElementById("cityWeatherSearchForm");
 let currentWeatherIcon = document.getElementById("weatherIcon");
-let forecastWeatherIcon = document.getElementById("forecastIcon");
-let citySearchBtn = document.getElementById("searchBtn");
+let citySearchButton = document.getElementById("searchBtn");
 
-const currentWeatherArticle = document.getElementById("todayWeatherContainer");
-const fiveDayArticle = document.getElementById("fiveDayForecastContainer");
+// SEARCH HISTORY SECTION
+let citySearchArr = [];
+
+// Add event listener for search button
+citySearchButton.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    // Storing to localStorage
+    let citySearchValue = citySearch.value;
+    citySearchArr.push(citySearchValue);
+    localStorage.setItem("cityName", JSON.stringify(citySearchArr));
+
+    getWeatherToday(citySearchValue);
+    displaySearchHistory();
+});
+
+function displaySearchHistory() {
+
+    let searchHistoryEl = document.getElementById("searchHistory");
+    searchHistoryEl.find("button").remove();
+
+    citySearchArr.forEach(function (city) {
+        let cityHistoryBtn = `<button></button>"`;
+        cityHistoryBtn.append(city);
+        cityHistoryBtn.appendTo(searchHistoryEl);
+        cityHistoryBtn.click(function () {
+            getWeatherToday(city);
+        });
+    });
+};
+
+// -----
 
 const cityName = document.getElementById("thisCity");
 const currentTemp = document.getElementById("temperature");
@@ -31,10 +57,9 @@ $(document).ready(function () {
     dateTime();
 });
 
-// Retrieve today's weather from OpenWeather's API
-function getWeatherToday(citySearch) {
+function getWeatherToday(city) {
     
-    const weatherAPIUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + "Kuala Lumpur" + "&appid=" + weatherAPIKey;
+    const weatherAPIUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + weatherAPIKey;
 
     fetch(weatherAPIUrl)
     .then((response) => response.json())
@@ -43,10 +68,14 @@ function getWeatherToday(citySearch) {
         // Retrieving latitude and longitude for UV Index perusal
         const latitude = data.coord.lat;
         const longitude = data.coord.lon;
-        const weatherForecastURL = "http://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=minutely,hourly&appid=" + weatherAPIKey;
+
+        console.log(latitude)
+        console.log(longitude)
+
+        const weatherForecastURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=minutely,hourly,alerts&appid=" + weatherAPIKey;
         
         displayCurrentWeather(data);
-
+        
         fetch(weatherForecastURL)            
         .then(function (response) {
             if (response.error) {
@@ -57,16 +86,12 @@ function getWeatherToday(citySearch) {
             
         }).then(function (data) {
 
-            console.log(data);
-            console.log(data.current.uvi);
-            console.log(data.current.temp);
-
             displayUVI(data);
             displayFiveDayForecast(data.daily.slice(1,6));
         }).catch(error => {
             console.log("error: ", error)
         });
-    });
+    }); showResults();
 };
 
 // Function to display UV Index and weather icon (linked to same onecall API)
@@ -116,7 +141,6 @@ function displayFiveDayForecast(days) {
 
         // append weatherCard to container
         forecastContainerEl.innerHTML += weatherCard;
-
     });
 };
 
@@ -125,7 +149,6 @@ function displayCurrentWeather(data){
     const kelvinTemp = data.main.temp;
     const windSpeedMs = data.wind.speed;
 
-    // Populating results into respective html elements
     cityName.innerHTML = data.name + ", " + data.sys.country;
     currentTemp.innerHTML = CELSIUS_CONVERSION(kelvinTemp).toFixed(1);
     currentHumidity.innerHTML = data.main.humidity;
@@ -144,45 +167,9 @@ function KmH_CONVERSION(windSpeedMs) {
 
 getWeatherToday();
 
-function showCurrentWeather() {
-    dailyWeatherResults.classList.remove('hide');
-};
-
-function show5DayForecast() {
+function showResults() {
+    currentWeatherForecast.classList.remove('hide');
     forecastResults.classList.remove('hide');
 };
 
-show5DayForecast();
-showCurrentWeather();
-
-// Function to save search history to localStorage
-// function saveSearchHistory() {
-//     localStorage.setItem("cityHistory", JSON.stringify(citySearchHistory));
-// };
-
-// Display search history as buttons on left side
-
-// function displaySearchHistory() {
-// };
-
-// Search Button
-
-// citySearchBtn.click(function () {
-
-//     if (cityName === "") {
-//         return;
-//     }
-//     getWeatherToday(cityName);
-//     // Add function for five day forecast
-//     // // 
-//     // Add function for storing to localStorage
-// });
-
-// cityWeatherForm.click(function (event) {
-//     event.preventDefault();
-//     citySearchBtn.click();
-// });
-
-
-// Event listeners
-// $(cityWeatherSearchForm).click("submit", getWeatherToday);
+citySearchButton.addEventListener("click", getWeatherToday);

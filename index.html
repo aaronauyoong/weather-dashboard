@@ -34,16 +34,12 @@
             <!-- Search Container -->
             <div id="searchContainer" class="col-12 col-md-3">
                 <!-- Search Input -->
+                <h2>Search for a city:</h2>
                 <div class="input-group mb-3">
-                    <h2>Search for a city:</h2>
-                    <form id="cityWeatherSearchForm" class="form-outline">
-                        <input id="citySearchInput" type="search" class="form-control"/>
-                    </form>
-                    <div class="input-group-append">
-                        <button id="searchBtn" type="button" class="btn btn-primary">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
+                    <input id="citySearchInput" type="search" class="form-control"/>
+                    <button id="searchBtn" type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
                 </div>
                 <!-- Search History -->
                 <div id="searchHistory" class="searchHistoryBtns">
@@ -51,8 +47,8 @@
                 </div>
             </div>
              <!-- Search Results -->
-            <div id="searchResults" class="col-12 col-md-9 hide">
-                <div id="cityForecastNow" class="currentCity row border m-2 p-2">
+            <div id="searchResults" class="col-12 col-md-9">
+                <div id="cityForecastNow" class="currentCity row border m-2 p-2 hide">
                     <div id="todayForecast"><h3>Today's Forecast</h3></div>
                     <div id="todayWeatherContainer" class="list-group">
                         <div id="currentWeatherTitle">
