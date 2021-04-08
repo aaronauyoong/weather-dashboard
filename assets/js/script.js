@@ -3,6 +3,7 @@ let weatherAPIKey = "3f6064abc9bf7b1ed4920185e7d8007a";
 
 // Define main variables
 let searchHistoryEl = document.getElementById("searchHistory");
+let clearSearchButton = document.getElementById("clearHistoryBtn")
 let currentWeatherForecast = document.getElementById("cityForecastNow");
 let forecastResults = document.getElementById("city5DayForecast");
 let citySearch = document.getElementById("citySearchInput");
@@ -187,3 +188,9 @@ function showResults() {
 };
 
 citySearchButton.addEventListener("click", getWeatherToday);
+
+// Clear Search History Button
+clearSearchButton.addEventListener("click", function() {
+    localStorage.clear();
+    location.reload();
+})

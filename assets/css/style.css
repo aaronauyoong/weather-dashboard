@@ -25,7 +25,27 @@ p {
     margin: 0;
 }
 
-.searchHistory {
+#clearHistoryBtn {
+    background-color: var(--white);
+    width: 100%;
+    padding: 1rem;
+    margin: 0.5rem;
+    color: var(--solidred);
+    border-radius: 0.5rem;
+    border: 1px solid var(--gentlered);
+}
+
+#clearHistory button:hover{
+    background-color: var(--solidred);
+    width: 100%;
+    padding: 1rem;
+    margin: 0.5rem;
+    color: var(--white);
+    border-radius: 0.5rem;
+    border: 1px solid var(--gentlered);
+}
+
+#searchHistory button {
     display: block;
     width: 100%;
     padding: 1rem;
@@ -37,7 +57,7 @@ p {
     border-radius: 0.5rem;
 }
 
-.searchHistory button:hover {
+#searchHistory button:hover {
     background-color: var(--solidred);
     color: var(--white);
     transition: 0.3s;
