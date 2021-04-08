@@ -10,41 +10,6 @@ let currentWeatherIcon = document.getElementById("weatherIcon");
 let citySearchButton = document.getElementById("searchBtn");
 let forecastContainerEl = document.getElementById("fiveDayForecastContainer");
 
-
-// SEARCH HISTORY SECTION
-let citySearchArr = [];
-
-// Add event listener for search button
-citySearchButton.addEventListener("click", function (event) {
-    event.preventDefault();
-
-    // Storing to localStorage
-    let citySearchValue = citySearch.value;
-    citySearchArr.push(citySearchValue);
-    localStorage.setItem("cityName", JSON.stringify(citySearchArr));
-
-    clearForecastCards();
-    getWeatherToday(citySearchValue);
-    displaySearchHistory();
-});
-
-function displaySearchHistory() {
-
-    let searchHistoryEl = document.getElementById("searchHistory");
-    searchHistoryEl.find("button").remove();
-
-    citySearchArr.forEach(function (city) {
-        let cityHistoryBtn = `<button></button>"`;
-        cityHistoryBtn.append(city);
-        cityHistoryBtn.appendTo(searchHistoryEl);
-        cityHistoryBtn.click(function () {
-            getWeatherToday(city);
-        });
-    });
-};
-
-// -----
-
 const cityName = document.getElementById("thisCity");
 const currentTemp = document.getElementById("temperature");
 const currentHumidity = document.getElementById("humidity");
@@ -59,6 +24,37 @@ $(document).ready(function () {
     datetime = $('#dateNow')
     dateTime();
 });
+
+// SEARCH HISTORY SECTION
+let citySearchArr = [];
+
+// Add event listener for search button
+citySearchButton.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    // Storing to localStorage - clarify this part with Lu
+    let citySearchValue = citySearch.value;
+    citySearchArr.push(citySearchValue);
+    localStorage.setItem("cityName", JSON.stringify(citySearchArr));
+
+    clearForecastCards();
+    getWeatherToday(citySearchValue);
+    citySearchArr.unshift(citySearchValue);
+    citySearchArr.splice(5);
+    displaySearchHistory();
+});
+
+function displaySearchHistory() {
+
+    citySearchArr.forEach(function (city) {
+        // let cityHistory = document.createelemnt("button")
+        let cityHistoryBtn = `<button>${city}</button>`; // "<button>Melbourne</button> {textContent: "Melbourne"}
+        //append elemtnt to searchHistoryEl
+        searchHistoryEl.innerHTML += cityHistoryBtn;
+        //Add listener normally 
+        cityHistoryBtn.addEventListener("click", getWeatherToday);
+    });
+};
 
 function getWeatherToday(city) {
     
@@ -108,17 +104,29 @@ function displayUVI(data) {
     currentWeatherIcon.src = "https://openweathermap.org/img/wn/" + apiWeatherIcon + ".png";
     currentUVIndex.innerHTML = apiUVIndex;
 
-    if (apiUVIndex >= 0 && apiUVIndex <= 2.99) {
-        currentUVIndex.classList.add("uvLow");
-    } else if (apiUVIndex >= 3 && apiUVIndex <= 5.99) {
-        currentUVIndex.classList.add("uvModerate");
-    } else if (apiUVIndex >= 6 && apiUVIndex <= 7.99) {
-        currentUVIndex.classList.add("uvHigh");
-    } else if (apiUVIndex >= 8 && apiUVIndex <= 10.99) {
-        currentUVIndex.classList.add("uvVeryHigh");
-    } else {
-        currentUVIndex.classList.add("uvExtreme");
-    }
+    // Clarify this part with Lu
+
+    // $(this).find("span").removeClass("uvLow uvModerate uvHigh uvVeryHigh uvExtreme");
+    $("#uvIndexRisk").removeClass("uvLow uvModerate uvHigh uvVeryHigh uvExtreme");
+
+    // if (apiUVIndex >= 0 && apiUVIndex <= 2.99) {
+    //     currentUVIndex.classList.add("uvLow");
+    // } else if (apiUVIndex >= 3 && apiUVIndex <= 5.99) {
+    //     currentUVIndex.classList.add("uvModerate");
+    // } else if (apiUVIndex >= 6 && apiUVIndex <= 7.99) {
+    //     currentUVIndex.classList.add("uvHigh");
+    // } else if (apiUVIndex >= 8 && apiUVIndex <= 10.99) {
+    //     currentUVIndex.classList.add("uvVeryHigh");
+    // } else {
+    //     currentUVIndex.classList.add("uvExtreme");
+    // }
+
+    if (apiUVIndex >= 0 && apiUVIndex <= 2.99) return currentUVIndex.classList.add("uvLow");
+    if (apiUVIndex >= 3 && apiUVIndex <= 5.99) return currentUVIndex.classList.add("uvModerate");
+    if (apiUVIndex >= 6 && apiUVIndex <= 7.99) return currentUVIndex.classList.add("uvHigh");
+    if (apiUVIndex >= 8 && apiUVIndex <= 10.99) return currentUVIndex.classList.add("uvVeryHigh");
+    return currentUVIndex.classList.add("uvExtreme");
+
 }; 
 
 function displayFiveDayForecast(days) {

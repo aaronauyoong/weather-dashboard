@@ -1,5 +1,8 @@
 :root {
     --stormblue: rgb(39, 39, 56);
+    --solidred: rgb(68, 7, 7);
+    --gentlered: rgb(192, 168, 168);
+    --solidgrey: rgb(100, 96, 96);
     --green: green;
     --yellow: yellow;
     --orange: orange;
@@ -22,8 +25,27 @@ p {
     margin: 0;
 }
 
+.searchHistory {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    margin: 0.5rem;
+    background-color: var(--gentlered);
+    font-size: 12px;
+    color: var(--black);
+    border: 1px solid var(--solidgrey);
+    border-radius: 0.5rem;
+}
+
+.searchHistory button:hover {
+    background-color: var(--solidred);
+    color: var(--white);
+    transition: 0.3s;
+    font-size: x-large;
+}
+
 .currentCity {
-    border-radius: 5px;
+    border-radius: 0.5rem;
 }
 
 .hide {
@@ -41,7 +63,7 @@ p {
 };
 
 #uvIndex {
-    padding: 5px;
+    padding: 0.5rem;
 }
 
 .uvLow {
