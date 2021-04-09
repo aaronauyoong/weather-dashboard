@@ -58,7 +58,8 @@ function displaySearchHistory() {
             searchHistoryEl.appendChild(cityHistoryButton);
     
             cityHistoryButton.addEventListener("click", function () {
-                getWeatherToday(city)
+                getWeatherToday(city);
+                clearForecastCards(city);
             });
         });
     };
