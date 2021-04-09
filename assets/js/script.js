@@ -55,10 +55,8 @@ function displaySearchHistory() {
     if (localStorage.getItem('cityName')) {
         JSON.parse(localStorage.getItem('cityName')).forEach(function (city) {
 
-            // const cityHistoryButtonDiv = document.createElement("div");
             const cityHistoryButton = document.createElement("button");
             cityHistoryButton.textContent = city;
-            // cityHistoryButtonDiv.appendChild(cityHistoryButton);
             searchHistoryEl.appendChild(cityHistoryButton);
     
             cityHistoryButton.addEventListener("click", function () {
@@ -70,7 +68,7 @@ function displaySearchHistory() {
 
 function getWeatherToday(city) {
     
-    const weatherAPIUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + weatherAPIKey;
+    const weatherAPIUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherAPIKey}`;
 
     fetch(weatherAPIUrl)
     .then((response) => response.json())
@@ -80,7 +78,7 @@ function getWeatherToday(city) {
         const latitude = data.coord.lat;
         const longitude = data.coord.lon;
 
-        const weatherForecastURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=minutely,hourly,alerts&appid=" + weatherAPIKey;
+        const weatherForecastURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,hourly,alerts&appid=${weatherAPIKey}`;
         
         displayCurrentWeather(data);
         
