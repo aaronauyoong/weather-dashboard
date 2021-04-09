@@ -27,8 +27,6 @@ $(document).ready(function () {
 });
 
 // SEARCH HISTORY SECTION
-
-// Add event listener for search button
 citySearchButton.addEventListener("click", function (event) {
     event.preventDefault();
 
@@ -65,6 +63,11 @@ function displaySearchHistory() {
         });
     };
 };
+
+clearSearchButton.addEventListener("click", function() {
+    localStorage.clear();
+    location.reload();
+})
 
 function getWeatherToday(city) {
     
@@ -173,9 +176,3 @@ function showResults() {
     currentWeatherForecast.classList.remove('hide');
     forecastResults.classList.remove('hide');
 };
-
-// Clear Search History Button
-clearSearchButton.addEventListener("click", function() {
-    localStorage.clear();
-    location.reload();
-})
