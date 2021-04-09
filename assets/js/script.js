@@ -3,7 +3,7 @@ let weatherAPIKey = "3f6064abc9bf7b1ed4920185e7d8007a";
 
 // Define main variables
 let searchHistoryEl = document.getElementById("searchHistory");
-let clearSearchButton = document.getElementById("clearHistoryBtn")
+let clearSearchButton = document.getElementById("clearHistoryBtn");
 let currentWeatherForecast = document.getElementById("cityForecastNow");
 let forecastResults = document.getElementById("city5DayForecast");
 let citySearch = document.getElementById("citySearchInput");
@@ -27,34 +27,45 @@ $(document).ready(function () {
 });
 
 // SEARCH HISTORY SECTION
-let citySearchArr = [];
 
 // Add event listener for search button
 citySearchButton.addEventListener("click", function (event) {
     event.preventDefault();
 
-    // Storing to localStorage - clarify this part with Lu
     let citySearchValue = citySearch.value;
-    citySearchArr.push(citySearchValue);
-    localStorage.setItem("cityName", JSON.stringify(citySearchArr));
+
+    let cityNames = JSON.parse(localStorage.getItem('cityName')) || [];
+
+    if (!cityNames.includes(citySearchValue)) {
+        cityNames.unshift(citySearchValue);
+    }
+
+    cityNames.splice(5);
+
+    localStorage.setItem("cityName", JSON.stringify(cityNames));
 
     clearForecastCards();
     getWeatherToday(citySearchValue);
-    citySearchArr.unshift(citySearchValue);
-    citySearchArr.splice(5);
     displaySearchHistory();
 });
 
 function displaySearchHistory() {
+    searchHistoryEl.innerHTML = "";
 
-    citySearchArr.forEach(function (city) {
-        // let cityHistory = document.createelemnt("button")
-        let cityHistoryBtn = `<button>${city}</button>`; // "<button>Melbourne</button> {textContent: "Melbourne"}
-        //append elemtnt to searchHistoryEl
-        searchHistoryEl.innerHTML += cityHistoryBtn;
-        //Add listener normally 
-        cityHistoryBtn.addEventListener("click", getWeatherToday);
-    });
+    if (localStorage.getItem('cityName')) {
+        JSON.parse(localStorage.getItem('cityName')).forEach(function (city) {
+
+            // const cityHistoryButtonDiv = document.createElement("div");
+            const cityHistoryButton = document.createElement("button");
+            cityHistoryButton.textContent = city;
+            // cityHistoryButtonDiv.appendChild(cityHistoryButton);
+            searchHistoryEl.appendChild(cityHistoryButton);
+    
+            cityHistoryButton.addEventListener("click", function () {
+                getWeatherToday(city)
+            });
+        });
+    };
 };
 
 function getWeatherToday(city) {
@@ -68,9 +79,6 @@ function getWeatherToday(city) {
         // Retrieving latitude and longitude for UV Index perusal
         const latitude = data.coord.lat;
         const longitude = data.coord.lon;
-
-        console.log(latitude)
-        console.log(longitude)
 
         const weatherForecastURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=minutely,hourly,alerts&appid=" + weatherAPIKey;
         
@@ -105,22 +113,7 @@ function displayUVI(data) {
     currentWeatherIcon.src = "https://openweathermap.org/img/wn/" + apiWeatherIcon + ".png";
     currentUVIndex.innerHTML = apiUVIndex;
 
-    // Clarify this part with Lu
-
-    // $(this).find("span").removeClass("uvLow uvModerate uvHigh uvVeryHigh uvExtreme");
     $("#uvIndexRisk").removeClass("uvLow uvModerate uvHigh uvVeryHigh uvExtreme");
-
-    // if (apiUVIndex >= 0 && apiUVIndex <= 2.99) {
-    //     currentUVIndex.classList.add("uvLow");
-    // } else if (apiUVIndex >= 3 && apiUVIndex <= 5.99) {
-    //     currentUVIndex.classList.add("uvModerate");
-    // } else if (apiUVIndex >= 6 && apiUVIndex <= 7.99) {
-    //     currentUVIndex.classList.add("uvHigh");
-    // } else if (apiUVIndex >= 8 && apiUVIndex <= 10.99) {
-    //     currentUVIndex.classList.add("uvVeryHigh");
-    // } else {
-    //     currentUVIndex.classList.add("uvExtreme");
-    // }
 
     if (apiUVIndex >= 0 && apiUVIndex <= 2.99) return currentUVIndex.classList.add("uvLow");
     if (apiUVIndex >= 3 && apiUVIndex <= 5.99) return currentUVIndex.classList.add("uvModerate");
@@ -140,7 +133,6 @@ function displayFiveDayForecast(days) {
         let celsiusTempForecast = CELSIUS_CONVERSION(forecastTemp).toFixed(1);
         let forecastHumidity =  day.humidity;
 
-        // construct card content
         const weatherCard = `
         <div id="fiveDayForecastCard" class="weatherCard">
         <h5>${forecastDate}</h5>
@@ -150,7 +142,6 @@ function displayFiveDayForecast(days) {
         </div> 
         `;
 
-        // append weatherCard to container
         forecastContainerEl.innerHTML += weatherCard;
     });
 };
@@ -180,14 +171,10 @@ function KmH_CONVERSION(windSpeedMs) {
     return windSpeedMs * 3.6;
 };
 
-getWeatherToday();
-
 function showResults() {
     currentWeatherForecast.classList.remove('hide');
     forecastResults.classList.remove('hide');
 };
-
-citySearchButton.addEventListener("click", getWeatherToday);
 
 // Clear Search History Button
 clearSearchButton.addEventListener("click", function() {
