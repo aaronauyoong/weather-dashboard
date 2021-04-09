@@ -23,6 +23,8 @@ Below the current weather conditions, are a five-day forecast displaying the dat
 
 Clicking on a city in the search history will present you with current and future conditions for that city. Search history is stored in localStorage. 
 
+Note that the search history buttons only go up to the recent five searches. Anything older will be removed from the button list.
+
 A clear all button allows for the user to clear their search history (and their localStorage), also causing the page to refresh, looking brand new.
 
 The following image shows a mock-up of what is expected from this weather dashboard application: 
@@ -31,38 +33,44 @@ The following image shows a mock-up of what is expected from this weather dashbo
 
 ## Screenshots
 
-1. Screenshot of landing page,  displaying current time and past timeblocks (grey).
+1. Screenshot of landing page.
 <br>
 <img src="assets/images/weatherappscreenshot1.png" width="80%">
 <br>
 <br>
 
-2. Screenshot of first search of city "Tokyo", displaying current weather and forecasted weather.
+2. Screenshot of first search of city "Melbourne", displaying current weather and forecasted weather.
 <br>
 <img src="assets/images/weatherappscreenshot2.png" width="80%">
 <br>
 <br>
 
-3. Screenshot of second search of city "Los Angeles", displaying its current weather and forecasted weather. 
+3. Screenshot of second search of city "Sydney", displaying its current weather and forecasted weather. 
 <br>
 <img src="assets/images/weatherappscreenshot3.png" width="80%">
 <br>
 <br>
 
-4. Screenshot of clicking on search history, bringing up the weather forecase of previous search.
-<br>
-<img src="assets/images/weatherappscreenshot6.png" width="80%">
-<br>
-<br>
-
-5. Screenshot of hovering over the "Clear All" button.
+4. Screenshot of clicking on search history (after conducting 5 searches), bringing up the weather forecast of previous search.
 <br>
 <img src="assets/images/weatherappscreenshot4.png" width="80%">
 <br>
 <br>
 
-6. Screenshot of after clicking the "Clear All" button, effectively clearing out the localStorage and refreshing the page.
+5. Screenshot of hovering over the "Clear All" button.
 <br>
 <img src="assets/images/weatherappscreenshot5.png" width="80%">
+<br>
+<br>
+
+6. Screenshot of after clicking the "Clear All" button, effectively clearing out the localStorage and refreshing the page.
+<br>
+<img src="assets/images/weatherappscreenshot6.png" width="80%">
+<br>
+<br>
+
+6. Screenshot of localStorage after clicking the "Clear All" button, indicating that it is now empty.
+<br>
+<img src="assets/images/weatherappscreenshot7.png" width="80%">
 <br>
 <br>

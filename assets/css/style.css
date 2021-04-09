@@ -43,6 +43,8 @@ p {
     color: var(--white);
     border-radius: 0.5rem;
     border: 1px solid var(--gentlered);
+    transition: 0.3s;
+    font-size: x-large;
 }
 
 #searchHistory button {
