@@ -1,4 +1,4 @@
-# 06 Server-Side APIs: Weather Dashboard
+# Weather Dashboard (Server-Side APIs)
 Project Owner: Aaron Au Yoong
 </br>
 View live link here: https://aaronauyoong.github.io/weather-dashboard/.
