@@ -3,6 +3,14 @@ Project Owner: Aaron Au Yoong
 </br>
 View live link here: https://aaronauyoong.github.io/weather-dashboard/.
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://choosealicense.com/licenses/mit/)
+
+## Table of Contents
+* [Introduction](#Introduction)
+* [Technologies](#Technologies)
+* [Functionalities](#Functionalities)
+* [Screenshots](#Screenshots)
+* [License](#License)
 
 ## Introduction
 In order for travel enthusiasts to better plan their trips, they have the need to know weather outlooks for multiple cities. The creation of a weather dashboard would be ideal in order to meet their needs. 
@@ -74,3 +82,6 @@ The following image shows a mock-up of what is expected from this weather dashbo
 <img src="assets/images/weatherappscreenshot7.png" width="80%">
 <br>
 <br>
+
+## License
+Copyright (c) 2021-Present Aaron Au Yoong. All rights reserved.
